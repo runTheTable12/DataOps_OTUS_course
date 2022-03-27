@@ -1,1 +1,1 @@
-# DataOps_OTUS_course
+## This repository contains my homeworks of OTUS DataOps couse.
