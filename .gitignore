@@ -1,2 +1,4 @@
 ansible_homework/hosts
 ansible_homework/ansible.cfg
+.DS_Store
+.gitignore
