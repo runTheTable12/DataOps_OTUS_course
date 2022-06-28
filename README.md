@@ -8,4 +8,4 @@
 
 - [airflow homework](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/airflow_homework)
 
-- [clickhouse deploy homework] (https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/ch_deploy)
+- [clickhouse deploy homework](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/ch_deploy)
