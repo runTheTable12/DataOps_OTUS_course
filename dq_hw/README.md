@@ -33,7 +33,7 @@ course_id INTEGER REFERENCES hw.course(id)
 
 ```
 
-Далее, я указал хост вм, которая предстаначается для `Amundsen` и запустил playbook ansible. В качестве backend использовал `Neo4j`.
+Далее, я указал хост вм, которая предстаначается для `Amundsen` и запустил [`playbook`](ansible/amundsen-deploy.yml) ansible. В качестве backend использовал `Neo4j`.
 ![](pics/2.png)
 
 В качестве интеграции был использован переделанный [`скрипт`](ansible/postgres_loader.py) из нативных примеров.
@@ -51,5 +51,5 @@ course_id INTEGER REFERENCES hw.course(id)
 
 - - исправил: cmd: "git config --global --add safe.directory /app/amundsen"
 
-- некорректные версии трёх (pyparsing, importlib-metadata, jinja2)
+- некорректные версии трёх библиотек(pyparsing, importlib-metadata, jinja2)
 - - исправил - перезаписал c валидными для приложения версиями
