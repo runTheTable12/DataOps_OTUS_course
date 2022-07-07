@@ -8,4 +8,7 @@
 
 - [airflow homework](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/airflow_homework)
 
-- [clickhouse deploy homework](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/ch_deploy)
+- [clickhouse cluster deploy homework](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/ch_deploy)
+
+- [data quality monitoring system deployment](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/dq_hw)
+

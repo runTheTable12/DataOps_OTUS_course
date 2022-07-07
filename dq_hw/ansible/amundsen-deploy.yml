@@ -1,0 +1,101 @@
+- name: amundsen-deploy
+  hosts: amundsen
+  become: yes
+
+  tasks:
+    - name: update packages
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        force_apt_get: true
+        upgrade: dist
+  
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 
+            'software-properties-common', 'python3-pip', 
+            'virtualenv', 'python3-setuptools', 'python3-venv', 'libpq-dev', 'python3-psycopg2']
+    
+    - name: ensure repository key is installed
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: ensure docker registry is available
+      apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
+
+    - name: ensure docker and dependencies are installed
+      apt: name=docker-ce update_cache=yes
+
+    - service: name=docker state=restarted
+
+    - name: Install docker-compose from official github repo
+      get_url:
+        url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
+
+    - name: Create Folder
+      file: 
+        path: /app/amundsen/
+        owner: anatolii 
+        group: anatolii 
+        mode: 0755 
+        state: directory
+    
+    - name: Set git config
+      shell:
+        cmd: "git config --global --add safe.directory /app/amundsen"
+    
+    - name: Clone amundsen
+      git:
+        repo: https://github.com/amundsen-io/amundsen.git
+        dest: /app/amundsen/
+        clone: yes
+        update: yes
+        recursive: yes
+    
+    - name: Run Neo4j Backend
+      shell:
+        cmd: "docker-compose -f docker-amundsen.yml up -d"
+        chdir: /app/amundsen/
+    
+    - name: Create Virtual Environment for Data Builder
+      shell:
+        cmd: "python3 -m venv venv"
+        chdir: /app/amundsen/databuilder
+    
+    - name: Install packages for Data Builder
+      ansible.builtin.pip:
+        requirements: "/app/amundsen/databuilder/requirements.txt"
+        chdir: /app/amundsen/databuilder
+        virtualenv: /app/amundsen/databuilder/.databuilder_env
+    
+    - name: renstall packages
+      ansible.builtin.pip:
+        name:
+          - pyparsing==2.4.7
+          - importlib-metadata==3.6.0
+          - jinja2==3.1
+          - psycopg2
+        extra_args: --force-reinstall
+        chdir: /app/amundsen/databuilder
+        virtualenv: /app/amundsen/databuilder/.databuilder_env
+    
+    - name: Run setup 
+      shell:
+        cmd: "/app/amundsen/databuilder/.databuilder_env/bin/python setup.py install"
+        chdir: /app/amundsen/databuilder
+    
+    - name: Copy file with owner and permission, using symbolic representation
+      ansible.builtin.copy:
+        src: postgres_loader.py
+        dest: /app/amundsen/databuilder/example/scripts/
+        owner: anatolii
+        group: anatolii
+        mode: u=rwx,g=rx,o=rx
+    
+    - name: Run sample
+      shell:
+        cmd: "/app/amundsen/databuilder/.databuilder_env/bin/python postgres_loader.py"
+        chdir: /app/amundsen/databuilder/example/scripts/   
