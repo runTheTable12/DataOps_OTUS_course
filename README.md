@@ -12,3 +12,4 @@
 
 - [data quality monitoring system deployment](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/dq_hw)
 
+- [mlflow deployment homework](https://github.com/pythonicUser/DataOps_OTUS_course/tree/main/mlflow_hw)
