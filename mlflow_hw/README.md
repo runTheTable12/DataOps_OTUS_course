@@ -15,8 +15,8 @@
 Ниже приведены скриншоты поэтапного выполнения домашней работы.
 
 ![](pics/Screen%20Shot%202022-08-10%20at%208.28.38%20pm.png)
-![](/pics/Screen%20Shot%202022-08-10%20at%208.34.19%20pm.png)
-![](/pics/Screen%20Shot%202022-08-10%20at%208.35.14%20pm.png)
-![](/pics/Screen%20Shot%202022-08-10%20at%208.41.23%20pm.png)
-![](/pics/Screen%20Shot%202022-08-10%20at%208.41.59%20pm.png)
-![](/pics/Screen%20Shot%202022-08-10%20at%208.42.13%20pm.png)
+![](pics/Screen%20Shot%202022-08-10%20at%208.34.19%20pm.png)
+![](pics/Screen%20Shot%202022-08-10%20at%208.35.14%20pm.png)
+![](pics/Screen%20Shot%202022-08-10%20at%208.41.23%20pm.png)
+![](pics/Screen%20Shot%202022-08-10%20at%208.41.59%20pm.png)
+![](pics/Screen%20Shot%202022-08-10%20at%208.42.13%20pm.png)
